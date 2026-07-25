@@ -1,180 +1,654 @@
 <head>
   <title>done.next</title>
-  <link rel="icon" type="image/x-icon" href="/icon.ico">
+  <link rel="shortcut icon" href="./icon.ico" type="image/x-icon">
 </head>
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap');
-*{margin:0;padding:0;box-sizing:border-box}
-:root{--ink:#0f0f0e;--mid:#6a6a66;--faint:#b0afaa;--rule:#e5e4e0;--bg:#ffffff;--off:#f3f2ef}
-body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.72;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:'DM Serif Display',serif;font-weight:400;letter-spacing:-.01em}
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Serif+Display:ital@0;1&display=swap');
 
-nav{padding:0 2.5rem;border-bottom:1px solid var(--rule)}
-.nav-i{max-width:1080px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:54px}
-.nav-name{font-size:13px;font-weight:500;letter-spacing:.03em;color:var(--ink)}
-.nav-links{display:flex;gap:2.5rem}
-.nav-links a{font-size:11px;font-weight:500;color:var(--mid);text-decoration:none;letter-spacing:.09em;text-transform:uppercase;transition:color .15s}
-.nav-links a:hover{color:var(--ink)}
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box
+  }
 
-/* HEADLINE PICKER */
-.headline-picker{background:var(--off);border-bottom:1px solid var(--rule);padding:2rem 2.5rem}
-.hp-inner{max-width:1080px;margin:0 auto}
-.hp-label{font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:1rem}
-.hp-note{font-size:13px;color:var(--mid);margin-bottom:1.25rem}
-.hp-options{display:flex;gap:.75rem}
-.hp-btn{flex:1;background:var(--bg);border:1.5px solid var(--rule);padding:1rem 1.25rem;cursor:pointer;text-align:left;transition:border-color .15s;font-family:'DM Sans',sans-serif}
-.hp-btn:hover{border-color:var(--ink)}
-.hp-btn.active{border-color:var(--ink);background:var(--ink)}
-.hp-btn.active .hp-btn-tag{color:rgba(255,255,255,.35)}
-.hp-btn.active .hp-btn-text{color:#fff}
-.hp-btn-tag{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);display:block;margin-bottom:.4rem}
-.hp-btn-text{font-family:'DM Serif Display',serif;font-size:1rem;line-height:1.25;color:var(--ink)}
+  :root {
+    --ink: #0f0f0e;
+    --mid: #6a6a66;
+    --faint: #b0afaa;
+    --rule: #e5e4e0;
+    --bg: #ffffff;
+    --off: #f3f2ef
+  }
 
-/* HERO */
-.hero{max-width:1080px;margin:0 auto;padding:7rem 2.5rem 6rem;border-bottom:1px solid var(--rule)}
-.hero h1{font-size:clamp(2.8rem,5.2vw,4.2rem);line-height:1.06;max-width:820px;margin-bottom:2.75rem;color:var(--ink)}
-.hero h1 em{font-style:italic;color:var(--mid)}
-.hero-row{display:grid;grid-template-columns:1fr auto;gap:5rem;align-items:start}
-.hero-sub{font-size:17px;color:var(--mid);font-weight:300;line-height:1.7;max-width:560px}
-.btn{display:inline-block;background:var(--ink);color:#fff;font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.9rem 2.25rem;white-space:nowrap;transition:opacity .2s}
-.btn:hover{opacity:.7}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased
+  }
 
-section{padding:6rem 2.5rem}
-section.off{background:var(--off)}
-section.dark{background:var(--ink)}
-.si{max-width:1080px;margin:0 auto}
-.s-label{font-size:11px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:var(--faint);margin-bottom:1.5rem}
-.dark .s-label{color:rgba(255,255,255,.28)}
-.s-h{font-size:clamp(1.8rem,2.8vw,2.3rem);line-height:1.15;margin-bottom:4rem;max-width:640px;color:var(--ink)}
-.dark .s-h{color:#fff}
+  h1,
+  h2,
+  h3 {
+    font-family: 'DM Serif Display', serif;
+    font-weight: 400;
+    letter-spacing: -.01em
+  }
 
-.sit-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--rule)}
-.sit{background:var(--bg);padding:2.5rem 2.25rem}
-.sit-n{font-size:11px;font-weight:500;letter-spacing:.08em;color:var(--faint);margin-bottom:1.1rem}
-.sit-title{font-size:1rem;font-weight:500;margin-bottom:.55rem;line-height:1.35;color:var(--ink)}
-.sit-body{font-size:14px;color:var(--mid);line-height:1.72}
+  nav {
+    padding: 0 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    position: sticky;
+    top: 0;
+    background: var(--bg);
+    z-index: 100
+  }
 
-.help-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3rem}
-.help-group-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.3);margin-bottom:1.25rem;padding-bottom:.75rem;border-bottom:1px solid rgba(255,255,255,.1)}
-.help-group ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
-.help-group li{font-size:14px;color:rgba(255,255,255,.6);line-height:1.5;padding-left:1rem;position:relative}
-.help-group li::before{content:"—";position:absolute;left:0;color:rgba(255,255,255,.2)}
+  .nav-i {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 54px
+  }
 
-.typical-intro{font-size:15px;color:var(--mid);margin-bottom:2rem;max-width:640px}
-.typ-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--rule)}
-.typ{background:var(--off);padding:1.75rem 2rem;font-size:15px;color:var(--ink);display:flex;gap:.85rem;align-items:flex-start}
-.typ-check{color:var(--faint);flex-shrink:0;font-size:1.1rem;line-height:1.5}
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center
+  }
 
-.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;background:var(--rule)}
-.pj{background:var(--bg);padding:2.25rem 2rem}
-.pj-type{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:.9rem}
-.pj-title{font-size:1rem;font-weight:500;margin-bottom:.5rem;line-height:1.3;color:var(--ink)}
-.pj-client{font-size:12px;color:var(--faint);margin-bottom:.65rem}
-.pj-body{font-size:13.5px;color:var(--mid);line-height:1.65}
+  .nav-links a {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--mid);
+    text-decoration: none;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    transition: color .15s;
+    cursor: pointer;
+    white-space: nowrap
+  }
 
-.ways-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;background:var(--rule)}
-.way{background:var(--off);padding:2.5rem 2rem}
-.way-label{font-size:11px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:1.1rem}
-.way h3{font-family:'DM Serif Display',serif;font-size:1.15rem;font-weight:400;margin-bottom:.8rem;color:var(--ink)}
-.way p{font-size:14px;color:var(--mid);line-height:1.7}
+  .nav-links a:hover {
+    color: var(--ink)
+  }
 
-.about-grid{display:grid;grid-template-columns:3fr 2fr;gap:7rem;align-items:start}
-.about-body p{font-size:15px;color:var(--mid);line-height:1.75;margin-bottom:1rem}
-.about-body p.lead{font-family:'DM Serif Display',serif;font-size:1.35rem;font-style:italic;line-height:1.45;color:var(--mid);margin-bottom:1.5rem}
-.fact-block{display:flex;flex-direction:column}
-.fact{display:flex;flex-direction:column;padding:.9rem 0;border-bottom:1px solid var(--rule)}
-.fact:first-child{border-top:1px solid var(--rule)}
-.fact-k{font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-bottom:.25rem}
-.fact-v{font-size:14px;font-weight:500;color:var(--ink)}
+  .lang-switch {
+    display: flex;
+    border: 1.5px solid var(--rule);
+    overflow: hidden;
+    flex-shrink: 0;
+    margin-left: 1.5rem
+  }
 
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start}
-.contact-grid h2{font-size:clamp(1.8rem,3vw,2.5rem);color:#fff;line-height:1.1;margin-bottom:1.25rem}
-.contact-sub{font-size:15px;color:rgba(255,255,255,.4);line-height:1.7;font-weight:300;margin-bottom:3rem}
-.c-item{margin-bottom:1.4rem}
-.c-label{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:.3rem}
-.c-val{font-size:15px;color:rgba(255,255,255,.7)}
-.c-val a{color:rgba(255,255,255,.7);text-decoration:none;transition:color .15s}
-.c-val a:hover{color:#fff}
-.btn-inv{display:inline-block;background:#fff;color:var(--ink);font-size:12px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding:.9rem 2.25rem;transition:opacity .2s;margin-top:.5rem}
-.btn-inv:hover{opacity:.8}
-.fit-block{padding-top:2.5rem}
-.fit-label{font-size:10px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25);margin-bottom:1.25rem}
-.fit-list{list-style:none;display:flex;flex-direction:column;gap:.9rem}
-.fit-list li{font-size:14px;color:rgba(255,255,255,.5);line-height:1.55;padding-left:1.25rem;position:relative}
-.fit-list li::before{content:"—";position:absolute;left:0;color:rgba(255,255,255,.2)}
+  .lang-btn {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .06em;
+    padding: .35rem .75rem;
+    cursor: pointer;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    transition: all .15s;
+    background: var(--off);
+    color: var(--mid)
+  }
 
-footer{padding:1.5rem 2.5rem;border-top:1px solid var(--rule)}
-.fi{max-width:1080px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
-footer p{font-size:11px;color:var(--faint)}
+  .lang-btn.active {
+    background: var(--ink);
+    color: #fff
+  }
 
-@media(max-width:800px){
-  .hero-row,.hp-options{flex-direction:column;gap:2rem}
-  .sit-grid,.typ-grid,.proj-grid,.ways-grid{grid-template-columns:1fr}
-  .help-grid,.about-grid,.contact-grid{grid-template-columns:1fr;gap:3rem}
-}
+  .lang-btn:not(.active):hover {
+    background: var(--rule);
+    color: var(--ink)
+  }
+
+  .hero {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 7rem 2.5rem 6rem;
+    border-bottom: 1px solid var(--rule)
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 4.6vw, 3.8rem);
+    line-height: 1.08;
+    max-width: 840px;
+    margin-bottom: 2.75rem;
+    color: var(--ink)
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--mid)
+  }
+
+  .hero-row {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 5rem;
+    align-items: start
+  }
+
+  .hero-sub {
+    font-size: 17px;
+    color: var(--mid);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 560px
+  }
+
+  .btn {
+    display: inline-block;
+    background: var(--ink);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .9rem 2.25rem;
+    white-space: nowrap;
+    transition: opacity .2s
+  }
+
+  .btn:hover {
+    opacity: .7
+  }
+
+  section {
+    padding: 6rem 2.5rem
+  }
+
+  section.off {
+    background: var(--off)
+  }
+
+  section.dark {
+    background: var(--ink)
+  }
+
+  .si {
+    max-width: 1080px;
+    margin: 0 auto
+  }
+
+  .s-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .13em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 1.5rem
+  }
+
+  .dark .s-label {
+    color: rgba(255, 255, 255, .28)
+  }
+
+  .s-h {
+    font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+    line-height: 1.15;
+    margin-bottom: 4rem;
+    max-width: 680px;
+    color: var(--ink)
+  }
+
+  .dark .s-h {
+    color: #fff
+  }
+
+  .sit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--rule)
+  }
+
+  .sit {
+    background: var(--bg);
+    padding: 2.5rem 2.25rem
+  }
+
+  .sit-n {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .08em;
+    color: var(--faint);
+    margin-bottom: 1.1rem
+  }
+
+  .sit-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: .55rem;
+    line-height: 1.35;
+    color: var(--ink)
+  }
+
+  .sit-body {
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.72
+  }
+
+  .help-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3rem
+  }
+
+  .help-group-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .3);
+    margin-bottom: 1.25rem;
+    padding-bottom: .75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, .1)
+  }
+
+  .help-group ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .55rem
+  }
+
+  .help-group li {
+    font-size: 14px;
+    color: rgba(255, 255, 255, .6);
+    line-height: 1.5;
+    padding-left: 1rem;
+    position: relative
+  }
+
+  .help-group li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, .2)
+  }
+
+  .typical-intro {
+    font-size: 15px;
+    color: var(--mid);
+    margin-bottom: 2rem;
+    max-width: 680px
+  }
+
+  .typ-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--rule)
+  }
+
+  .typ {
+    background: var(--off);
+    padding: 1.75rem 2rem;
+    font-size: 15px;
+    color: var(--ink);
+    display: flex;
+    gap: .85rem;
+    align-items: flex-start;
+    line-height: 1.55
+  }
+
+  .typ-check {
+    color: var(--faint);
+    flex-shrink: 0;
+    font-size: 1rem;
+    padding-top: .1rem
+  }
+
+  .proj-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px;
+    background: var(--rule)
+  }
+
+  .pj {
+    background: var(--bg);
+    padding: 2.25rem 2rem
+  }
+
+  .pj-type {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: .9rem
+  }
+
+  .pj-title {
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: .35rem;
+    line-height: 1.3;
+    color: var(--ink)
+  }
+
+  .pj-client {
+    font-size: 12px;
+    color: var(--faint);
+    margin-bottom: .65rem
+  }
+
+  .pj-body {
+    font-size: 13.5px;
+    color: var(--mid);
+    line-height: 1.65
+  }
+
+  .ways-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 3px;
+    background: var(--rule)
+  }
+
+  .way {
+    background: var(--off);
+    padding: 2.5rem 2rem
+  }
+
+  .way-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: 1.1rem
+  }
+
+  .way h3 {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    margin-bottom: .8rem;
+    color: var(--ink)
+  }
+
+  .way p {
+    font-size: 14px;
+    color: var(--mid);
+    line-height: 1.7
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 7rem;
+    align-items: start
+  }
+
+  .about-body p {
+    font-size: 15px;
+    color: var(--mid);
+    line-height: 1.75;
+    margin-bottom: 1rem
+  }
+
+  .about-body p.lead {
+    font-family: 'DM Serif Display', serif;
+    font-size: 1.35rem;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--mid);
+    margin-bottom: 1.5rem
+  }
+
+  .fact-block {
+    display: flex;
+    flex-direction: column
+  }
+
+  .fact {
+    display: flex;
+    flex-direction: column;
+    padding: .9rem 0;
+    border-bottom: 1px solid var(--rule)
+  }
+
+  .fact:first-child {
+    border-top: 1px solid var(--rule)
+  }
+
+  .fact-k {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--faint);
+    margin-bottom: .25rem
+  }
+
+  .fact-v {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink)
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 7rem;
+    align-items: start
+  }
+
+  .contact-grid h2 {
+    font-size: clamp(1.8rem, 3vw, 2.5rem);
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 1.25rem
+  }
+
+  .contact-sub {
+    font-size: 15px;
+    color: rgba(255, 255, 255, .4);
+    line-height: 1.7;
+    font-weight: 300;
+    margin-bottom: 3rem
+  }
+
+  .c-item {
+    margin-bottom: 1.4rem
+  }
+
+  .c-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .25);
+    margin-bottom: .3rem
+  }
+
+  .c-val {
+    font-size: 15px;
+    color: rgba(255, 255, 255, .7)
+  }
+
+  .c-val a {
+    color: rgba(255, 255, 255, .7);
+    text-decoration: none;
+    transition: color .15s
+  }
+
+  .c-val a:hover {
+    color: #fff
+  }
+
+  .btn-inv {
+    display: inline-block;
+    background: #fff;
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: .9rem 2.25rem;
+    transition: opacity .2s;
+    margin-top: .5rem
+  }
+
+  .btn-inv:hover {
+    opacity: .8
+  }
+
+  .fit-block {
+    padding-top: 2.5rem
+  }
+
+  .fit-label {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, .25);
+    margin-bottom: 1.25rem
+  }
+
+  .fit-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: .9rem
+  }
+
+  .fit-list li {
+    font-size: 14px;
+    color: rgba(255, 255, 255, .5);
+    line-height: 1.55;
+    padding-left: 1.25rem;
+    position: relative
+  }
+
+  .fit-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: rgba(255, 255, 255, .2)
+  }
+
+  footer {
+    padding: 1.5rem 2.5rem;
+    border-top: 1px solid var(--rule)
+  }
+
+  .fi {
+    max-width: 1080px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center
+  }
+
+  footer p {
+    font-size: 11px;
+    color: var(--faint)
+  }
+
+  @media(max-width:860px) {
+    .hero-row {
+      grid-template-columns: 1fr;
+      gap: 2rem
+    }
+
+    .sit-grid,
+    .typ-grid,
+    .proj-grid,
+    .ways-grid {
+      grid-template-columns: 1fr
+    }
+
+    .help-grid,
+    .about-grid,
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem
+    }
+
+    .nav-links {
+      gap: 1.25rem
+    }
+
+    .nav-links a {
+      font-size: 10px
+    }
+  }
 </style>
 
 <nav>
   <div class="nav-i">
-    <span class="nav-name">Kseniia Zaichenko</span>
     <div class="nav-links">
-      <a href="#situations">Where I help</a>
-      <a href="#work">Work</a>
-      <a href="#ways">Working together</a>
-      <a href="#contact">Contact</a>
+      <a href="#howhelp" id="nav-1">Leistungen</a>
+      <a href="#work" id="nav-2">Projekte</a>
+      <a href="#ways" id="nav-3">Zusammenarbeit</a>
+      <a href="#about" id="nav-4">Über mich</a>
+      <a href="#contact" id="nav-5">Kontakt</a>
+    </div>
+    <div class="lang-switch">
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('de')">DE</button>
     </div>
   </div>
 </nav>
 
-<div class="headline-picker">
-  <div class="hp-inner">
-    <div class="hp-label">Choose your headline</div>
-    <div class="hp-note">Click to preview live on the page below.</div>
-    <div class="hp-options">
-      <button class="hp-btn active" onclick="setHeadline(0)">
-        <span class="hp-btn-tag">Option A</span>
-        <span class="hp-btn-text">I take ownership of projects so your team can stay focused on theirs.</span>
-      </button>
-      <button class="hp-btn" onclick="setHeadline(1)">
-        <span class="hp-btn-tag">Option B</span>
-        <span class="hp-btn-text">I make sure your projects get done.</span>
-      </button>
-    </div>
-  </div>
-</div>
-
 <div class="hero">
-  <h1 id="hero-h1">I take ownership of projects so your<br>team can stay <em>focused on theirs.</em></h1>
+  <h1 id="hero-h1">Projekte brauchen jemanden,<br>der <em>den Überblick behält.</em></h1>
   <div class="hero-row">
-    <p class="hero-sub">Most teams don't need another full-time hire. They need someone who steps in, gets up to speed quickly and keeps everything moving until it's delivered. I work with companies, founders and teams who have a lot on their plate and not enough hands to hold it all.</p>
-    <a href="#contact" class="btn">Start a conversation</a>
+    <p class="hero-sub" id="hero-sub">Nicht jedes Unternehmen braucht eine fest angestellte Projektleitung. Oft braucht
+      es jemanden, der kurzfristig einsteigt, sich schnell einarbeitet und Projekte zuverlässig bis zum Abschluss
+      steuert. Ich unterstütze Unternehmen, Agenturen und Teams, wenn Projekte komplexer werden, Ressourcen fehlen oder
+      im Tagesgeschäft einfach keine Kapazitäten mehr frei sind.</p>
+    <a href="#contact" class="btn" id="hero-cta">Lassen Sie uns sprechen</a>
   </div>
 </div>
 
 <section id="situations">
   <div class="si">
-    <div class="s-label">Where I come in</div>
-    <div class="s-h">Familiar situations?</div>
+    <div class="s-label" id="sit-label">Wo ich unterstütze</div>
+    <div class="s-h" id="sit-h">Kommt Ihnen das bekannt vor?</div>
     <div class="sit-grid">
       <div class="sit">
         <div class="sit-n">01</div>
-        <div class="sit-title">Your team is stretched and the project still needs an owner</div>
-        <div class="sit-body">Everyone is busy. The project is real, the deadline is real but nobody has the capacity to hold it together. I step in, take ownership and keep it moving until it's delivered.</div>
+        <div class="sit-title" id="s1t">Das Projekt ist wichtig – aber niemand hat Zeit, es zu steuern.</div>
+        <div class="sit-body" id="s1b">Alle Beteiligten sind ausgelastet. Das Projekt läuft bereits, die Deadline rückt
+          näher, aber niemand kann die Gesamtverantwortung übernehmen. Ich steige ein, schaffe Struktur und sorge dafür,
+          dass das Projekt zuverlässig vorankommt.</div>
       </div>
       <div class="sit">
         <div class="sit-n">02</div>
-        <div class="sit-title">The project suddenly got bigger than expected</div>
-        <div class="sit-body">More stakeholders, more suppliers, more moving parts. What started simple is now complex — and you need someone who can bring structure without slowing everything down.</div>
+        <div class="sit-title" id="s2t">Das Projekt ist plötzlich deutlich komplexer geworden.</div>
+        <div class="sit-body" id="s2b">Mehr Stakeholder, mehr Dienstleister, mehr Abstimmungen. Was überschaubar
+          begonnen hat, entwickelt sich schnell zu einem Projekt mit vielen Abhängigkeiten. Ich bringe Ordnung in die
+          Abläufe, ohne Prozesse unnötig zu verkomplizieren.</div>
       </div>
       <div class="sit">
         <div class="sit-n">03</div>
-        <div class="sit-title">Operations are eating your most expensive people's time</div>
-        <div class="sit-body">Callsheets, crew bookings, availability checks, scheduling changes — important work that needs a dedicated owner and not your best people spending their afternoons on admin.</div>
+        <div class="sit-title" id="s3t">Operative Aufgaben binden Ihre wichtigsten Mitarbeitenden.</div>
+        <div class="sit-body" id="s3b">Terminplanung, Dienstleister koordinieren, Verfügbarkeiten prüfen, Änderungen
+          abstimmen – wichtige Aufgaben, die Zeit kosten. Ich übernehme die operative Projektkoordination, damit sich
+          Ihr Team auf seine Kernaufgaben konzentrieren kann.</div>
       </div>
       <div class="sit">
         <div class="sit-n">04</div>
-        <div class="sit-title">Stakeholders and clients are losing the thread</div>
-        <div class="sit-body">When updates only happen when someone chases them, trust erodes. I keep communication proactive — clear status, early flags and no surprises. People feel informed rather than chased.</div>
+        <div class="sit-title" id="s4t">Informationen gehen verloren und Abstimmungen ziehen sich.</div>
+        <div class="sit-body" id="s4b">Wenn Projektbeteiligte ständig nach dem aktuellen Stand fragen müssen, leidet die
+          Zusammenarbeit. Ich sorge für transparente Kommunikation, klare Statusupdates und frühzeitige Hinweise, bevor
+          aus kleinen Problemen große werden.</div>
       </div>
     </div>
   </div>
@@ -182,36 +656,38 @@ footer p{font-size:11px;color:var(--faint)}
 
 <section class="dark" id="howhelp">
   <div class="si">
-    <div class="s-label">How I help</div>
-    <div class="s-h">I take ownership of projects<br>from planning through delivery.</div>
+    <div class="s-label" id="help-label">Leistungen</div>
+    <div class="s-h" id="help-h">Ich begleite Projekte von der Planung<br>bis zum erfolgreichen Abschluss.</div>
     <div class="help-grid">
       <div class="help-group">
-        <div class="help-group-label">Project management</div>
-        <ul>
-          <li>Project planning</li>
-          <li>Stakeholder coordination</li>
-          <li>Timelines and milestones</li>
-          <li>Budget management</li>
-          <li>Reporting</li>
+        <div class="help-group-label" id="hg1">Projektmanagement</div>
+        <ul id="hg1-list">
+          <li>Projektplanung</li>
+          <li>Projektsteuerung</li>
+          <li>Stakeholder-Management</li>
+          <li>Termin- und Meilensteinplanung</li>
+          <li>Budgetüberwachung</li>
+          <li>Projekt-Reporting</li>
         </ul>
       </div>
       <div class="help-group">
-        <div class="help-group-label">Operations</div>
-        <ul>
-          <li>Scheduling and callsheets</li>
-          <li>Resource coordination</li>
-          <li>Supplier management</li>
-          <li>Documentation</li>
-          <li>Production support</li>
+        <div class="help-group-label" id="hg2">Operative Projektkoordination</div>
+        <ul id="hg2-list">
+          <li>Terminplanung und Einsatzplanung</li>
+          <li>Ressourcenkoordination</li>
+          <li>Dienstleistersteuerung</li>
+          <li>Projektdokumentation</li>
+          <li>Produktionskoordination</li>
         </ul>
       </div>
       <div class="help-group">
-        <div class="help-group-label">Marketing delivery</div>
-        <ul>
-          <li>Campaign implementation</li>
-          <li>Trade fair coordination</li>
-          <li>Print production</li>
-          <li>Communication rollouts</li>
+        <div class="help-group-label" id="hg3">Marketing &amp; Kommunikation</div>
+        <ul id="hg3-list">
+          <li>Umsetzung von Marketingkampagnen</li>
+          <li>Messekoordination</li>
+          <li>Printproduktion</li>
+          <li>Kommunikationsmaßnahmen</li>
+          <li>Roll-outs</li>
         </ul>
       </div>
     </div>
@@ -220,47 +696,59 @@ footer p{font-size:11px;color:var(--faint)}
 
 <section id="typical">
   <div class="si">
-    <div class="s-label">Typical projects</div>
-    <div class="s-h">Things people hire me for.</div>
-    <p class="typical-intro">Every project is different but these are typical reasons companies bring me in.</p>
+    <div class="s-label" id="typ-label">Typische Projekte</div>
+    <div class="s-h" id="typ-h">Dafür werde ich häufig hinzugezogen.</div>
+    <p class="typical-intro" id="typ-intro">Jedes Projekt ist anders. Diese Situationen begegnen mir jedoch immer
+      wieder.</p>
     <div class="typ-grid">
-      <div class="typ"><span class="typ-check">✔</span>A product launch with too many moving parts and no clear owner</div>
-      <div class="typ"><span class="typ-check">✔</span>Scheduling and operations for a live broadcast or event production</div>
-      <div class="typ"><span class="typ-check">✔</span>A campaign rollout that needs someone keeping agencies and suppliers aligned</div>
-      <div class="typ"><span class="typ-check">✔</span>Researching and comparing European suppliers for a production</div>
-      <div class="typ"><span class="typ-check">✔</span>Coordinating a trade fair from supplier briefing to stand delivery</div>
+      <div class="typ"><span class="typ-check">✔</span><span id="typ1">Produkteinführung mit vielen Beteiligten und ohne
+          klare Projektverantwortung</span></div>
+      <div class="typ"><span class="typ-check">✔</span><span id="typ2">Einsatzplanung und operative Koordination für
+          Live-Produktionen oder Broadcast-Projekte</span></div>
+      <div class="typ"><span class="typ-check">✔</span><span id="typ3">Umsetzung von Marketingkampagnen mit mehreren
+          Agenturen und Dienstleistern</span></div>
+      <div class="typ"><span class="typ-check">✔</span><span id="typ4">Recherche und Auswahl europäischer Lieferanten
+          für Produktionsprojekte</span></div>
+      <div class="typ"><span class="typ-check">✔</span><span id="typ5">Organisation von Messeauftritten – von der
+          Dienstleistersteuerung bis zur Fertigstellung des Messestands</span></div>
     </div>
   </div>
 </section>
 
 <section class="off" id="work">
   <div class="si">
-    <div class="s-label">Selected projects</div>
-    <div class="s-h">Work I've been trusted with.</div>
+    <div class="s-label" id="work-label">Ausgewählte Projekte</div>
+    <div class="s-h" id="work-h">Projekte, die ich begleiten durfte.</div>
     <div class="proj-grid">
       <div class="pj">
-        <div class="pj-type">Operations</div>
-        <div class="pj-title">Live broadcast operations</div>
-        <div class="pj-client">TGI / Bundesliga</div>
-        <div class="pj-body">Coordinate staffing, scheduling and production operations for virtual advertising during Bundesliga broadcasts.</div>
+        <div class="pj-type" id="p1type">Broadcast Operations</div>
+        <div class="pj-title" id="p1title">Virtuelle Bandenwerbung – Bundesliga</div>
+        <div class="pj-client">TGI</div>
+        <div class="pj-body" id="p1body">Koordination von Personal, Einsatzplanung und Produktionsabläufen für virtuelle
+          Werbeeinblendungen während Bundesliga-Übertragungen.</div>
       </div>
       <div class="pj">
-        <div class="pj-type">Production management</div>
-        <div class="pj-title">Packaging development</div>
+        <div class="pj-type" id="p2type">Produktionsmanagement</div>
+        <div class="pj-title" id="p2title">Verpackungsentwicklung – Swarovski</div>
         <div class="pj-client">Swarovski</div>
-        <div class="pj-body">Developed and coordinated the packaging production for a home décor collection — aligning suppliers, timelines and quality to deliver a launch on schedule.</div>
+        <div class="pj-body" id="p2body">Koordination der Entwicklung und Produktion einer Verpackungslinie für eine
+          Home-Décor-Kollektion. Steuerung von Lieferanten, Zeitplänen und Qualitätsanforderungen bis zum erfolgreichen
+          Launch.</div>
       </div>
       <div class="pj">
-        <div class="pj-type">Corporate communications</div>
-        <div class="pj-title">Pan-European communications rollout</div>
+        <div class="pj-type" id="p3type">Unternehmenskommunikation</div>
+        <div class="pj-title" id="p3title">Europaweiter Kommunikations-Roll-out</div>
         <div class="pj-client">Amazon</div>
-        <div class="pj-body">Coordinated the production and distribution of communication materials for an internal programme running across multiple European markets.</div>
+        <div class="pj-body" id="p3body">Koordination der Produktion und Verteilung von Kommunikationsmaterialien für
+          ein internes Programm in mehreren europäischen Märkten.</div>
       </div>
       <div class="pj">
-        <div class="pj-type">Print & editorial</div>
-        <div class="pj-title">National member magazine — mobil</div>
+        <div class="pj-type" id="p4type">Print &amp; Redaktion</div>
+        <div class="pj-title" id="p4title">Mitgliedermagazin „mobil"</div>
         <div class="pj-client">Deutsche Rheuma-Liga</div>
-        <div class="pj-body">Managed conception and production of a nationwide publication with state-specific editorial variations and advertising inserts. Full ownership from brief through to print delivery.</div>
+        <div class="pj-body" id="p4body">Gesamtverantwortung für Konzeption und Produktion einer bundesweiten
+          Publikation mit landesspezifischen Inhalten und Anzeigenvarianten – von der Planung bis zur Druckfreigabe.
+        </div>
       </div>
     </div>
   </div>
@@ -268,23 +756,27 @@ footer p{font-size:11px;color:var(--faint)}
 
 <section id="ways">
   <div class="si">
-    <div class="s-label">Ways we can work together</div>
-    <div class="s-h">Whatever fits your situation.</div>
+    <div class="s-label" id="ways-label">Zusammenarbeit</div>
+    <div class="s-h" id="ways-h">So können wir zusammenarbeiten.</div>
     <div class="ways-grid">
       <div class="way">
-        <div class="way-label">One project</div>
-        <h3>You need someone for a specific thing</h3>
-        <p>A trade fair, a campaign, a launch or a production. I come in, own it and deliver it.</p>
+        <div class="way-label" id="w1label">Projektbezogen</div>
+        <h3 id="w1h">Sie benötigen Unterstützung für ein konkretes Vorhaben</h3>
+        <p id="w1p">Einen Messeauftritt, einen Produktlaunch, eine Marketingkampagne oder ein Produktionsprojekt. Ich
+          übernehme die Projektsteuerung und begleite das Projekt bis zum Abschluss.</p>
       </div>
       <div class="way">
-        <div class="way-label">Interim support</div>
-        <h3>Your team needs a hand for a few months</h3>
-        <p>Your PM is overloaded, someone left or a project got bigger than expected. I step in, ramp up fast and keep things moving until the pressure is off.</p>
+        <div class="way-label" id="w2label">Interim-Unterstützung</div>
+        <h3 id="w2h">Ihre Projektleitung ist ausgelastet oder ausgefallen</h3>
+        <p id="w2p">Ihre Projektleitung ist ausgelastet, eine Stelle ist unbesetzt oder ein Projekt wächst schneller als
+          geplant. Ich steige kurzfristig ein, arbeite mich schnell ein und entlaste Ihr Team.</p>
       </div>
       <div class="way">
-        <div class="way-label">Ongoing operations</div>
-        <h3>Regular support, week in and week out</h3>
-        <p>A few hours or days a week, every week. Scheduling, coordination and follow-ups — the operational rhythm that keeps everything else from falling apart.</p>
+        <div class="way-label" id="w3label">Laufende Unterstützung</div>
+        <h3 id="w3h">Sie benötigen regelmäßig Unterstützung</h3>
+        <p id="w3p">Sie benötigen regelmäßig Unterstützung bei Planung, Koordination und operativen Aufgaben. Ich
+          begleite Ihre Projekte kontinuierlich – einige Stunden oder Tage pro Woche, genau so, wie es zu Ihrem Bedarf
+          passt.</p>
       </div>
     </div>
   </div>
@@ -294,21 +786,33 @@ footer p{font-size:11px;color:var(--faint)}
   <div class="si">
     <div class="about-grid">
       <div>
-        <div class="s-label">About</div>
+        <div class="s-label" id="about-label">Über mich</div>
         <div class="about-body">
-          <p class="lead">Most projects don't fail because people aren't good at their jobs. They fail because everyone is busy doing their own job while nobody owns the space in between.</p>
-          <p>That's usually where I come in.</p>
-          <p>For the last nine years I've worked across agencies, corporate teams and live productions helping projects move from "someone should really coordinate this" to "it's done." I've managed packaging launches, broadcast operations and editorial productions. The work looks different every time. What stays the same is the approach: get clear on what needs to happen, build the structure and see it through.</p>
-          <p>I'm based in Cologne and work in German and English. I'm not a consultant who hands over a report — I'm the person who stays until the job is done.</p>
+          <p class="lead" id="about-lead">Die meisten Projekte scheitern nicht an fehlender Kompetenz. Sie geraten ins
+            Stocken, weil alle mit ihren eigenen Aufgaben beschäftigt sind und niemand den Überblick über das große
+            Ganze behält.</p>
+          <p id="about-p1">Genau dort unterstütze ich.</p>
+          <p id="about-p2">Seit über neun Jahren arbeite ich an der Schnittstelle zwischen Agenturen, Unternehmen und
+            Produktionsumgebungen. Ich begleite Projekte von der ersten Planung bis zur erfolgreichen Umsetzung – von
+            Verpackungsentwicklungen über Broadcast-Produktionen bis hin zu europaweiten Kommunikationsprojekten. Jedes
+            Projekt ist anders. Mein Ansatz bleibt derselbe: Ziele verstehen, Strukturen schaffen, Beteiligte
+            koordinieren und Verantwortung übernehmen, bis das Projekt erfolgreich abgeschlossen ist.</p>
+          <p id="about-p3">Ich arbeite von Köln aus – auf Deutsch und Englisch, remote oder vor Ort. Ich verstehe mich
+            nicht als Beraterin, die Konzepte erstellt und anschließend übergibt, sondern als Projektmanagerin, die
+            Verantwortung übernimmt und Ergebnisse liefert.</p>
         </div>
       </div>
       <div>
         <div class="fact-block">
-          <div class="fact"><span class="fact-k">Based</span><span class="fact-v">Cologne, Germany</span></div>
-          <div class="fact"><span class="fact-k">German</span><span class="fact-v">Verhandlungssicher</span></div>
-          <div class="fact"><span class="fact-k">English</span><span class="fact-v">Full professional proficiency</span></div>
-          <div class="fact"><span class="fact-k">Ukrainian and Russian</span><span class="fact-v">Native</span></div>
-          <div class="fact"><span class="fact-k">Available for</span><span class="fact-v">Projects · Interim · Ongoing ops</span></div>
+          <div class="fact"><span class="fact-k" id="fk1">Standort</span><span class="fact-v" id="fv1">Köln</span></div>
+          <div class="fact"><span class="fact-k" id="fk2">Deutsch</span><span class="fact-v">Verhandlungssicher</span>
+          </div>
+          <div class="fact"><span class="fact-k" id="fk3">Englisch</span><span class="fact-v"
+              id="fv3">Verhandlungssicher</span></div>
+          <div class="fact"><span class="fact-k" id="fk4">Ukrainisch &amp; Russisch</span><span class="fact-v"
+              id="fv4">Muttersprache</span></div>
+          <div class="fact"><span class="fact-k" id="fk5">Verfügbar für</span><span class="fact-v"
+              id="fv5">Projektmandate · Interim · Laufende Projektunterstützung</span></div>
         </div>
       </div>
     </div>
@@ -319,27 +823,36 @@ footer p{font-size:11px;color:var(--faint)}
   <div class="si">
     <div class="contact-grid">
       <div>
-        <h2>Got something that needs sorting?</h2>
-        <p class="contact-sub">Tell me what you're working on. No pitch and no lengthy back-and-forth — just a straightforward conversation about whether I'm the right person for it.</p>
+        <h2 id="contact-h">Haben Sie ein Projekt, das Unterstützung braucht?</h2>
+        <p class="contact-sub" id="contact-sub">Erzählen Sie mir kurz, woran Sie arbeiten. Ohne Verkaufspräsentation und
+          ohne lange Abstimmung – wir besprechen unkompliziert, ob ich die richtige Unterstützung für Ihr Projekt bin.
+        </p>
         <div class="c-item">
-          <div class="c-label">Email</div>
+          <div class="c-label" id="cl1">E-Mail</div>
           <div class="c-val"><a href="mailto:hello@donenext.eu">hello@donenext.eu</a></div>
         </div>
         <div class="c-item">
-          <div class="c-label">Location</div>
-          <div class="c-val">Cologne · remote and on-site</div>
+          <div class="c-label" id="cl2">Telefon</div>
+          <div class="c-val"><a href="tel:+4915780896777">+49 1578 0896777</a></div>
         </div>
-        <a href="mailto:hello@donenext.eu" class="btn-inv">Write to me</a>
+        <div class="c-item">
+          <div class="c-label" id="cl3">Standort</div>
+          <div class="c-val" id="cv3">Köln · Remote und vor Ort</div>
+        </div>
+        <a href="mailto:hello@donenext.eu" class="btn-inv" id="contact-btn">Schreiben Sie mir</a>
       </div>
       <div>
         <div class="fit-block">
-          <div class="fit-label">I work well with</div>
+          <div class="fit-label" id="fit-label">Ich arbeite besonders gerne mit</div>
           <ul class="fit-list">
-            <li>Start-ups and founders who have too much going on and not enough hands</li>
-            <li>Small and mid-sized companies that don't need a full-time PM but do need the work done properly</li>
-            <li>Agencies needing senior project or operational support on specific mandates</li>
-            <li>Teams with live or broadcast productions that need tight scheduling</li>
-            <li>Anyone who needs a reliable person to own something and see it through</li>
+            <li id="fi1">Start-ups und Gründer:innen, die viele Projekte gleichzeitig stemmen.</li>
+            <li id="fi2">Kleinen und mittelständischen Unternehmen, die keine eigene Projektleitung benötigen, aber
+              professionelle Unterstützung wünschen.</li>
+            <li id="fi3">Agenturen, die kurzfristig erfahrene Projekt- oder Operations-Unterstützung brauchen.</li>
+            <li id="fi4">Teams aus den Bereichen Live-Produktion und Broadcast mit komplexen Einsatz- und
+              Terminplanungen.</li>
+            <li id="fi5">Unternehmen, die eine verlässliche Person suchen, die Verantwortung übernimmt und Projekte
+              konsequent zum Abschluss bringt.</li>
           </ul>
         </div>
       </div>
@@ -349,19 +862,158 @@ footer p{font-size:11px;color:var(--faint)}
 
 <footer>
   <div class="fi">
-    <p>© 2025 Kseniia Zaichenko · Cologne</p>
-    <p>Freelance Project & Operations Manager · Cologne · Germany</p>
+    <p>© 2025 Kseniia Zaichenko · Köln</p>
+    <p id="footer-kw">Freelance Projektmanagerin · Operations Management · Köln · Deutschland</p>
   </div>
 </footer>
 
 <script>
-const headlines = [
-  "I take ownership of projects so your<br>team can stay <em>focused on theirs.</em>",
-  "I make sure your<br>projects <em>get done.</em>"
-];
-function setHeadline(i){
-  document.getElementById('hero-h1').innerHTML = headlines[i];
-  document.querySelectorAll('.hp-btn').forEach((b,j)=>b.classList.toggle('active',i===j));
-  document.querySelector('.hero').scrollIntoView({behavior:'smooth',block:'center'});
-}
+  const content = {
+    de: {
+      'nav-1': 'Leistungen', 'nav-2': 'Projekte', 'nav-3': 'Zusammenarbeit', 'nav-4': 'Über mich', 'nav-5': 'Kontakt',
+      'nav-href-1': '#howhelp', 'nav-href-2': '#work', 'nav-href-3': '#ways', 'nav-href-4': '#about', 'nav-href-5': '#contact',
+      'hero-h1': 'Projekte brauchen jemanden,<br>der <em>den Überblick behält.</em>',
+      'hero-sub': 'Nicht jedes Unternehmen braucht eine fest angestellte Projektleitung. Oft braucht es jemanden, der kurzfristig einsteigt, sich schnell einarbeitet und Projekte zuverlässig bis zum Abschluss steuert. Ich unterstütze Unternehmen, Agenturen und Teams, wenn Projekte komplexer werden, Ressourcen fehlen oder im Tagesgeschäft einfach keine Kapazitäten mehr frei sind.',
+      'hero-cta': 'Lassen Sie uns sprechen',
+      'sit-label': 'Wo ich unterstütze', 'sit-h': 'Kommt Ihnen das bekannt vor?',
+      's1t': 'Das Projekt ist wichtig – aber niemand hat Zeit, es zu steuern.',
+      's1b': 'Alle Beteiligten sind ausgelastet. Das Projekt läuft bereits, die Deadline rückt näher, aber niemand kann die Gesamtverantwortung übernehmen. Ich steige ein, schaffe Struktur und sorge dafür, dass das Projekt zuverlässig vorankommt.',
+      's2t': 'Das Projekt ist plötzlich deutlich komplexer geworden.',
+      's2b': 'Mehr Stakeholder, mehr Dienstleister, mehr Abstimmungen. Was überschaubar begonnen hat, entwickelt sich schnell zu einem Projekt mit vielen Abhängigkeiten. Ich bringe Ordnung in die Abläufe, ohne Prozesse unnötig zu verkomplizieren.',
+      's3t': 'Operative Aufgaben binden Ihre wichtigsten Mitarbeitenden.',
+      's3b': 'Terminplanung, Dienstleister koordinieren, Verfügbarkeiten prüfen, Änderungen abstimmen – wichtige Aufgaben, die Zeit kosten. Ich übernehme die operative Projektkoordination, damit sich Ihr Team auf seine Kernaufgaben konzentrieren kann.',
+      's4t': 'Informationen gehen verloren und Abstimmungen ziehen sich.',
+      's4b': 'Wenn Projektbeteiligte ständig nach dem aktuellen Stand fragen müssen, leidet die Zusammenarbeit. Ich sorge für transparente Kommunikation, klare Statusupdates und frühzeitige Hinweise, bevor aus kleinen Problemen große werden.',
+      'help-label': 'Leistungen', 'help-h': 'Ich begleite Projekte von der Planung<br>bis zum erfolgreichen Abschluss.',
+      'hg1': 'Projektmanagement',
+      'hg1-list': '<li>Projektplanung</li><li>Projektsteuerung</li><li>Stakeholder-Management</li><li>Termin- und Meilensteinplanung</li><li>Budgetüberwachung</li><li>Projekt-Reporting</li>',
+      'hg2': 'Operative Projektkoordination',
+      'hg2-list': '<li>Terminplanung und Einsatzplanung</li><li>Ressourcenkoordination</li><li>Dienstleistersteuerung</li><li>Projektdokumentation</li><li>Produktionskoordination</li>',
+      'hg3': 'Marketing &amp; Kommunikation',
+      'hg3-list': '<li>Umsetzung von Marketingkampagnen</li><li>Messekoordination</li><li>Printproduktion</li><li>Kommunikationsmaßnahmen</li><li>Roll-outs</li>',
+      'typ-label': 'Typische Projekte', 'typ-h': 'Dafür werde ich häufig hinzugezogen.',
+      'typ-intro': 'Jedes Projekt ist anders. Diese Situationen begegnen mir jedoch immer wieder.',
+      'typ1': 'Produkteinführung mit vielen Beteiligten und ohne klare Projektverantwortung',
+      'typ2': 'Einsatzplanung und operative Koordination für Live-Produktionen oder Broadcast-Projekte',
+      'typ3': 'Umsetzung von Marketingkampagnen mit mehreren Agenturen und Dienstleistern',
+      'typ4': 'Recherche und Auswahl europäischer Lieferanten für Produktionsprojekte',
+      'typ5': 'Organisation von Messeauftritten – von der Dienstleistersteuerung bis zur Fertigstellung des Messestands',
+      'work-label': 'Ausgewählte Projekte', 'work-h': 'Projekte, die ich begleiten durfte.',
+      'p1type': 'Broadcast Operations', 'p1title': 'Virtuelle Bandenwerbung – Bundesliga',
+      'p1body': 'Koordination von Personal, Einsatzplanung und Produktionsabläufen für virtuelle Werbeeinblendungen während Bundesliga-Übertragungen.',
+      'p2type': 'Produktionsmanagement', 'p2title': 'Verpackungsentwicklung – Swarovski',
+      'p2body': 'Koordination der Entwicklung und Produktion einer Verpackungslinie für eine Home-Décor-Kollektion. Steuerung von Lieferanten, Zeitplänen und Qualitätsanforderungen bis zum erfolgreichen Launch.',
+      'p3type': 'Unternehmenskommunikation', 'p3title': 'Europaweiter Kommunikations-Roll-out',
+      'p3body': 'Koordination der Produktion und Verteilung von Kommunikationsmaterialien für ein internes Programm in mehreren europäischen Märkten.',
+      'p4type': 'Print &amp; Redaktion', 'p4title': 'Mitgliedermagazin „mobil"',
+      'p4body': 'Gesamtverantwortung für Konzeption und Produktion einer bundesweiten Publikation mit landesspezifischen Inhalten und Anzeigenvarianten – von der Planung bis zur Druckfreigabe.',
+      'ways-label': 'Zusammenarbeit', 'ways-h': 'So können wir zusammenarbeiten.',
+      'w1label': 'Projektbezogen', 'w1h': 'Sie benötigen Unterstützung für ein konkretes Vorhaben',
+      'w1p': 'Einen Messeauftritt, einen Produktlaunch, eine Marketingkampagne oder ein Produktionsprojekt. Ich übernehme die Projektsteuerung und begleite das Projekt bis zum Abschluss.',
+      'w2label': 'Interim-Unterstützung', 'w2h': 'Ihre Projektleitung ist ausgelastet oder ausgefallen',
+      'w2p': 'Ihre Projektleitung ist ausgelastet, eine Stelle ist unbesetzt oder ein Projekt wächst schneller als geplant. Ich steige kurzfristig ein, arbeite mich schnell ein und entlaste Ihr Team.',
+      'w3label': 'Laufende Unterstützung', 'w3h': 'Sie benötigen regelmäßig Unterstützung',
+      'w3p': 'Sie benötigen regelmäßig Unterstützung bei Planung, Koordination und operativen Aufgaben. Ich begleite Ihre Projekte kontinuierlich – einige Stunden oder Tage pro Woche, genau so, wie es zu Ihrem Bedarf passt.',
+      'about-label': 'Über mich',
+      'about-lead': 'Die meisten Projekte scheitern nicht an fehlender Kompetenz. Sie geraten ins Stocken, weil alle mit ihren eigenen Aufgaben beschäftigt sind und niemand den Überblick über das große Ganze behält.',
+      'about-p1': 'Genau dort unterstütze ich.',
+      'about-p2': 'Seit über neun Jahren arbeite ich an der Schnittstelle zwischen Agenturen, Unternehmen und Produktionsumgebungen. Ich begleite Projekte von der ersten Planung bis zur erfolgreichen Umsetzung – von Verpackungsentwicklungen über Broadcast-Produktionen bis hin zu europaweiten Kommunikationsprojekten. Jedes Projekt ist anders. Mein Ansatz bleibt derselbe: Ziele verstehen, Strukturen schaffen, Beteiligte koordinieren und Verantwortung übernehmen, bis das Projekt erfolgreich abgeschlossen ist.',
+      'about-p3': 'Ich arbeite von Köln aus – auf Deutsch und Englisch, remote oder vor Ort. Ich verstehe mich nicht als Beraterin, die Konzepte erstellt und anschließend übergibt, sondern als Projektmanagerin, die Verantwortung übernimmt und Ergebnisse liefert.',
+      'fk1': 'Standort', 'fv1': 'Köln', 'fk2': 'Deutsch', 'fk3': 'Englisch', 'fv3': 'Verhandlungssicher',
+      'fk4': 'Ukrainisch &amp; Russisch', 'fv4': 'Muttersprache',
+      'fk5': 'Verfügbar für', 'fv5': 'Projektmandate · Interim · Laufende Projektunterstützung',
+      'contact-h': 'Haben Sie ein Projekt, das Unterstützung braucht?',
+      'contact-sub': 'Erzählen Sie mir kurz, woran Sie arbeiten. Ohne Verkaufspräsentation und ohne lange Abstimmung – wir besprechen unkompliziert, ob ich die richtige Unterstützung für Ihr Projekt bin.',
+      'cl1': 'E-Mail', 'cl2': 'Telefon', 'cl3': 'Standort', 'cv3': 'Köln · Remote und vor Ort',
+      'contact-btn': 'Schreiben Sie mir',
+      'fit-label': 'Ich arbeite besonders gerne mit',
+      'fi1': 'Start-ups und Gründer:innen, die viele Projekte gleichzeitig stemmen.',
+      'fi2': 'Kleinen und mittelständischen Unternehmen, die keine eigene Projektleitung benötigen, aber professionelle Unterstützung wünschen.',
+      'fi3': 'Agenturen, die kurzfristig erfahrene Projekt- oder Operations-Unterstützung brauchen.',
+      'fi4': 'Teams aus den Bereichen Live-Produktion und Broadcast mit komplexen Einsatz- und Terminplanungen.',
+      'fi5': 'Unternehmen, die eine verlässliche Person suchen, die Verantwortung übernimmt und Projekte konsequent zum Abschluss bringt.',
+      'footer-kw': 'Freelance Projektmanagerin · Operations Management · Köln · Deutschland'
+    },
+    en: {
+      'nav-1': 'How I Help', 'nav-2': 'Projects', 'nav-3': 'Working Together', 'nav-4': 'About Me', 'nav-5': 'Contact',
+      'nav-href-1': '#howhelp', 'nav-href-2': '#work', 'nav-href-3': '#ways', 'nav-href-4': '#about', 'nav-href-5': '#contact',
+      'hero-h1': 'I take ownership of projects so your<br>team can stay <em>focused on theirs.</em>',
+      'hero-sub': 'Most teams don\'t need another full-time hire. They need someone who steps in, gets up to speed quickly and keeps everything moving until it\'s delivered. I work with companies, founders and teams who have a lot on their plate and not enough hands to hold it all.',
+      'hero-cta': 'Start a conversation',
+      'sit-label': 'Where I come in', 'sit-h': 'Familiar situations?',
+      's1t': 'Your team is stretched and the project still needs an owner',
+      's1b': 'Everyone is busy. The project is real, the deadline is real but nobody has the capacity to hold it together. I step in, take ownership and keep it moving until it\'s delivered.',
+      's2t': 'The project suddenly got bigger than expected',
+      's2b': 'More stakeholders, more suppliers, more moving parts. What started simple is now complex — and you need someone who can bring structure without slowing everything down.',
+      's3t': 'Operations are eating your most expensive people\'s time',
+      's3b': 'Callsheets, crew bookings, availability checks, scheduling changes — important work that needs a dedicated owner and not your best people spending their afternoons on admin.',
+      's4t': 'Stakeholders and clients are losing the thread',
+      's4b': 'When updates only happen when someone chases them, trust erodes. I keep communication proactive — clear status, early flags and no surprises. People feel informed rather than chased.',
+      'help-label': 'How I help', 'help-h': 'I take ownership of projects<br>from planning through delivery.',
+      'hg1': 'Project management',
+      'hg1-list': '<li>Project planning</li><li>Stakeholder coordination</li><li>Timelines and milestones</li><li>Budget management</li><li>Reporting</li>',
+      'hg2': 'Operations',
+      'hg2-list': '<li>Scheduling and callsheets</li><li>Resource coordination</li><li>Supplier management</li><li>Documentation</li><li>Production support</li>',
+      'hg3': 'Marketing delivery',
+      'hg3-list': '<li>Campaign implementation</li><li>Trade fair coordination</li><li>Print production</li><li>Communication rollouts</li>',
+      'typ-label': 'Typical projects', 'typ-h': 'Things people hire me for.',
+      'typ-intro': 'Every project is different but these are typical reasons companies bring me in.',
+      'typ1': 'A product launch with too many moving parts and no clear owner',
+      'typ2': 'Scheduling and operations for a live broadcast or event production',
+      'typ3': 'A campaign rollout that needs someone keeping agencies and suppliers aligned',
+      'typ4': 'Researching and comparing European suppliers for a production',
+      'typ5': 'Coordinating a trade fair from supplier briefing to stand delivery',
+      'work-label': 'Selected projects', 'work-h': 'Work I\'ve been trusted with.',
+      'p1type': 'Broadcast Operations', 'p1title': 'Live broadcast operations — Bundesliga',
+      'p1body': 'Coordinate staffing, scheduling and production operations for virtual advertising during Bundesliga broadcasts.',
+      'p2type': 'Production management', 'p2title': 'Packaging development — Swarovski',
+      'p2body': 'Developed and coordinated the packaging production for a home décor collection — aligning suppliers, timelines and quality to deliver a launch on schedule.',
+      'p3type': 'Corporate communications', 'p3title': 'Pan-European communications rollout — Amazon',
+      'p3body': 'Coordinated the production and distribution of communication materials for an internal programme running across multiple European markets.',
+      'p4type': 'Print &amp; editorial', 'p4title': 'National member magazine — mobil',
+      'p4body': 'Managed conception and production of a nationwide publication with state-specific editorial variations and advertising inserts. Full ownership from brief through to print delivery.',
+      'ways-label': 'Ways we can work together', 'ways-h': 'Whatever fits your situation.',
+      'w1label': 'One project', 'w1h': 'You need someone for a specific thing',
+      'w1p': 'A trade fair, a campaign, a launch or a production. I come in, own it and deliver it.',
+      'w2label': 'Interim support', 'w2h': 'Your team needs a hand for a few months',
+      'w2p': 'Your PM is overloaded, someone left or a project got bigger than expected. I step in, ramp up fast and keep things moving until the pressure is off.',
+      'w3label': 'Ongoing operations', 'w3h': 'Regular support, week in and week out',
+      'w3p': 'A few hours or days a week, every week. Scheduling, coordination and follow-ups — the operational rhythm that keeps everything else from falling apart.',
+      'about-label': 'About me',
+      'about-lead': 'Most projects don\'t fail because people aren\'t good at their jobs. They fail because everyone is busy doing their own job while nobody owns the space in between.',
+      'about-p1': 'That\'s usually where I come in.',
+      'about-p2': 'For the last nine years I\'ve worked across agencies, corporate teams and live productions helping projects move from "someone should really coordinate this" to "it\'s done." I\'ve managed packaging launches, broadcast operations and editorial productions. The work looks different every time. What stays the same is the approach: get clear on what needs to happen, build the structure and see it through.',
+      'about-p3': 'I\'m based in Cologne and work in German and English. I\'m not a consultant who hands over a report — I\'m the person who stays until the job is done.',
+      'fk1': 'Based', 'fv1': 'Cologne, Germany', 'fk2': 'German', 'fk3': 'English', 'fv3': 'Full professional proficiency',
+      'fk4': 'Ukrainian and Russian', 'fv4': 'Native',
+      'fk5': 'Available for', 'fv5': 'Projects · Interim · Ongoing ops',
+      'contact-h': 'Got something that needs sorting?',
+      'contact-sub': 'Tell me what you\'re working on. No pitch and no lengthy back-and-forth — just a straightforward conversation about whether I\'m the right person for it.',
+      'cl1': 'Email', 'cl2': 'Phone', 'cl3': 'Location', 'cv3': 'Cologne · remote and on-site',
+      'contact-btn': 'Write to me',
+      'fit-label': 'I work well with',
+      'fi1': 'Start-ups and founders who have too much going on and not enough hands',
+      'fi2': 'Small and mid-sized companies that don\'t need a full-time PM but do need the work done properly',
+      'fi3': 'Agencies needing senior project or operational support on specific mandates',
+      'fi4': 'Teams with live or broadcast productions that need tight scheduling',
+      'fi5': 'Anyone who needs a reliable person to own something and see it through',
+      'footer-kw': 'Freelance Project & Operations Manager · Cologne · Germany'
+    }
+  };
+
+  function setLang(lang) {
+    const c = content[lang];
+    Object.keys(c).forEach(id => {
+      if (id.startsWith('nav-href-')) {
+        const num = id.replace('nav-href-', '');
+        const el = document.getElementById('nav-' + num);
+        if (el) el.href = c[id];
+      } else {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = c[id];
+      }
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent === lang.toUpperCase()));
+    document.documentElement.lang = lang;
+  }
 </script>
